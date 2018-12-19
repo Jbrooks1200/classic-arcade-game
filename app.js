@@ -37,6 +37,7 @@ class Hero {
         this.x = 201.5;
         this.y = 402;
         this.sprite = 'images/char-boy.png';
+        this.isIncremented = false;
     }
 
     render() {
@@ -77,22 +78,44 @@ class Hero {
 
     update() {
         for(Enemy of allEnemies){
-            if(this.y === Enemy.y && Enemy.x > this.x - 55){
+            if(this.x < enemy.x + 80) && ((this.x + 80) > enemy.x) && (this.y < (enemy.y + 20)) &&
+                ((this.y + 20) > enemy.y)) {
+                this.x = 201.5;
+                this.y = 402;
                 //this.reset();
             }
         }
     }
+    
+    increment() {
+        if((this.y <= 65) && (!isIncremented)) {
+            winCounter();
+            winStats();
+            isIncremented = true;
+        }
+    }
 }
+
+let isIncremented = false;
+let wins;
+function winCounter() {
+    wins = 0;
+    wins++
+    winCounter.innerHTML = wins;
+}
+
+function winStats() {
+    document.getElementById("winCount").innerHTML = wins
+}
+
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 const bug = new Enemy(-10, 70, 60);
 const bug2 = new Enemy(-13, 153, 150);
 const bug3 = new Enemy(-21, 236, 201);
-const bug4 = new Enemy(-30, 70, 243);
-const bug5 = new Enemy(-5, 153, 95);
 const allEnemies = [];
-allEnemies.push(bug, bug2, bug3, bug4, bug5);
+allEnemies.push(bug, bug2, bug3);
 // Init allEnemies array
 // For each emeny create and push new Enemy into above array
 
