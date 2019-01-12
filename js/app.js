@@ -43,9 +43,9 @@ class Hero {
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
-    reset (){
-        this.x = 201.5;
-        this.y = 402;
+    //reset (){
+        //this.x = 201.5;
+        //this.y = 402;
     }
 
     handleInput(keyPress) {
@@ -61,7 +61,7 @@ class Hero {
                 }
             break;
             case 'up': 
-                if(this.y > 75) {
+                if(this.y > 65) {
                     this.y -= 83;
                 } else {
                     this.x = 201.5;
