@@ -32,81 +32,83 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 //Hero class
+let wins = 0;
 class Hero {
     constructor() {
         this.x = 201.5;
         this.y = 402;
         this.sprite = 'images/char-boy.png';
-        this.isIncremented = false;
     }
-
+    
+    
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
-    //reset (){
-        //this.x = 201.5;
-        //this.y = 402;
-    }
-
+    
+    
     handleInput(keyPress) {
         switch(keyPress) {
             case 'left': 
-                if(this.x > 50) {
-                    this.x -= 101;
-                }
+            if(this.x > 50) {
+                this.x -= 101;
+            }
             break;
             case 'right': 
-                if(this.x < 400) {
-                    this.x += 101;
-                }
+            if(this.x < 400) {
+                this.x += 101;
+            }
             break;
             case 'up': 
-                if(this.y > 65) {
-                    this.y -= 83;
-                } else {
-                    this.x = 201.5;
-                    this.y = 400;
-                }   
+            if(this.y >= 65) {
+                this.y -= 83;
+            } else {
+                wins++;
+                document.querySelector("#winCount").innerHTML = wins;
+                this.x = 201.5;
+                this.y = 400;
+            }   
             break;
             case 'down': 
-                if(this.y < 400) {
-                    this.y += 83;
-                }    
+            if(this.y < 400) {
+                this.y += 83;
+            }    
             break;
-        }
-    }
-
-    update() {
-        for(Enemy of allEnemies){
-            if(this.x < enemy.x + 80) && ((this.x + 80) > enemy.x) && (this.y < (enemy.y + 20)) &&
-                ((this.y + 20) > enemy.y)) {
-                this.x = 201.5;
-                this.y = 402;
-                //this.reset();
-            }
         }
     }
     
-    increment() {
-        if((this.y <= 65) && (!isIncremented)) {
-            winCounter();
-            winStats();
-            isIncremented = true;
+    update() {
+        for(let enemy of allEnemies) {
+            if((this.x < enemy.x + 80) && ((this.x + 80) > enemy.x) && (this.y < (enemy.y + 20)) && ((this.y + 20) > enemy.y)) {
+                this.x = 201.5;
+                this.y = 402;
+            }      
         }
+    }  
+}
+
+/*
+function increment() { 
+    if((Hero.y <= 65) && (!isIncremented)) {
+        winStats();
+        winCounter();
+        isIncremented = true;
+        console.log('increment');
     }
 }
 
-let isIncremented = false;
+//let isIncremented = false;
 let wins;
 function winCounter() {
     wins = 0;
-    wins++
-    winCounter.innerHTML = wins;
+    wins = wins + 1;
+    //winCount.innerHTML = wins;
+    console.log('inside win counter');
 }
 
 function winStats() {
     document.getElementById("winCount").innerHTML = wins
 }
+*/
 
 
 // Now instantiate your objects.
@@ -122,7 +124,6 @@ allEnemies.push(bug, bug2, bug3);
 // Place the player object in a variable called player
 // New Hero Object
 const player = new Hero();
-
 
 
 // This listens for key presses and sends the keys to your
